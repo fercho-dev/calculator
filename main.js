@@ -36,7 +36,7 @@ function operationHandler() {
             switch(symbol) {
                 case '+':
                     if(operator) {
-                        resultOfOperation =+ operate(numbers[0] === '' ? resultOfOperation : parseInt(numbers[0]), parseInt(numbers[1]), operator);
+                        resultOfOperation =+ operate(numbers[0] === '' ? resultOfOperation : Number(numbers[0]), Number(numbers[1]), operator);
                         numbers[0] = resultOfOperation;
                         numbers[1] = '';
                         operator = 'add';
@@ -49,7 +49,7 @@ function operationHandler() {
                     break;
                 case '-':
                     if(operator) {
-                        resultOfOperation =+ operate(numbers[0] === '' ? resultOfOperation : parseInt(numbers[0]), parseInt(numbers[1]), operator);
+                        resultOfOperation =+ operate(numbers[0] === '' ? resultOfOperation : Number(numbers[0]), Number(numbers[1]), operator);
                         numbers[0] = resultOfOperation;
                         numbers[1] = '';
                         operator = 'substract';
@@ -62,7 +62,7 @@ function operationHandler() {
                     break;
                 case 'x':
                     if(operator) {
-                        resultOfOperation =+ operate(numbers[0] === '' ? resultOfOperation : parseInt(numbers[0]), parseInt(numbers[1]), operator);
+                        resultOfOperation =+ operate(numbers[0] === '' ? resultOfOperation : Number(numbers[0]), Number(numbers[1]), operator);
                         numbers[0] = resultOfOperation;
                         numbers[1] = '';
                         operator = 'multiply';
@@ -75,7 +75,7 @@ function operationHandler() {
                     break;
                 case '/':
                     if(operator) {
-                        resultOfOperation =+ operate(numbers[0] === '' ? resultOfOperation : parseInt(numbers[0]), parseInt(numbers[1]), operator);
+                        resultOfOperation =+ operate(numbers[0] === '' ? resultOfOperation : Number(numbers[0]), Number(numbers[1]), operator);
                         numbers[0] = resultOfOperation;
                         numbers[1] = '';
                         operator = 'divide';
@@ -87,7 +87,7 @@ function operationHandler() {
                     displayOperation(numbers, operator, symbol, resultOfOperation);
                     break;
                 case '=':
-                    resultOfOperation =+ operate(numbers[0] === '' ? resultOfOperation : parseInt(numbers[0]), parseInt(numbers[1]), operator);
+                    resultOfOperation =+ operate(numbers[0] === '' ? resultOfOperation : Number(numbers[0]), Number(numbers[1]), operator);
                     numbers[0] = '';
                     numbers[1] = '';
                     operator = '';
