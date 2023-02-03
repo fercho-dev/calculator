@@ -34,17 +34,24 @@ function displayOperation(numbers, operator, symbol, resultOfOperation) {
         displayText.innerText = resultOfOperation;
     }
 };
-
+const operationResult = () =>{
+    resultOfOperation =+ operate(numbers[0] === '' ? resultOfOperation : Number(numbers[0]), Number(numbers[1]), operator);
+    numbers[0] = resultOfOperation;
+    numbers[1] = '';
+}
+const clearCalculator = () =>{
+    numbers[0] = '';
+    numbers[1] = '';
+    operator = '';
+    resultOfOperation = null;
+}
 function operationHandler() {
     return (symbol) => {
         try {
             switch(symbol) {
                 case '+':
                     if(operator) {
-                        resultOfOperation =+ operate(numbers[0] === '' ? resultOfOperation : Number(numbers[0]), Number(numbers[1]), operator);
-                        numbers[0] = resultOfOperation;
-                        numbers[1] = '';
-                        operator = 'add';
+                        operationResult()
                         console.log(resultOfOperation);
                         displayOperation(numbers, operator, symbol, resultOfOperation);
                         break;
@@ -54,10 +61,7 @@ function operationHandler() {
                     break;
                 case '-':
                     if(operator) {
-                        resultOfOperation =+ operate(numbers[0] === '' ? resultOfOperation : Number(numbers[0]), Number(numbers[1]), operator);
-                        numbers[0] = resultOfOperation;
-                        numbers[1] = '';
-                        operator = 'substract';
+                        operationResult()
                         console.log(resultOfOperation);
                         displayOperation(numbers, operator, symbol, resultOfOperation);
                         break;
@@ -67,10 +71,7 @@ function operationHandler() {
                     break;
                 case 'x':
                     if(operator) {
-                        resultOfOperation =+ operate(numbers[0] === '' ? resultOfOperation : Number(numbers[0]), Number(numbers[1]), operator);
-                        numbers[0] = resultOfOperation;
-                        numbers[1] = '';
-                        operator = 'multiply';
+                        operationResult()
                         console.log(resultOfOperation);
                         displayOperation(numbers, operator, symbol, resultOfOperation);
                         break;
@@ -80,10 +81,7 @@ function operationHandler() {
                     break;
                 case '/':
                     if(operator) {
-                        resultOfOperation =+ operate(numbers[0] === '' ? resultOfOperation : Number(numbers[0]), Number(numbers[1]), operator);
-                        numbers[0] = resultOfOperation;
-                        numbers[1] = '';
-                        operator = 'divide';
+                        operationResult()
                         console.log(resultOfOperation);
                         displayOperation(numbers, operator, symbol, resultOfOperation);
                         break;
@@ -100,10 +98,7 @@ function operationHandler() {
                     displayOperation(numbers, operator, symbol, resultOfOperation);
                     break;
                 case 'C':
-                    numbers[0] = '';
-                    numbers[1] = '';
-                    operator = '';
-                    resultOfOperation = null;
+                    clearCalculator()
                     displayOperation(numbers, operator, symbol, resultOfOperation);
                     break;
                 default:
@@ -117,13 +112,10 @@ function operationHandler() {
             }
         } catch(error) {
             alert(`
-                Ups, something went wrong.
+                Oops, something went wrong.
                 ${error}
             `);
-            numbers[0] = '';
-            numbers[1] = '';
-            operator = '';
-            resultOfOperation = null;
+            clearCalculator()
             displayOperation(numbers, operator, 'C', resultOfOperation);
         }
     }
