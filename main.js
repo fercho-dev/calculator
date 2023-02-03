@@ -1,5 +1,9 @@
 import { operate } from './utilities.js';
 
+let numbers = ['', ''];
+let operator = '';
+let resultOfOperation = null;
+
 function displayOperation(numbers, operator, symbol, resultOfOperation) {
     const displayText = document.getElementById('text-display');
     if(
@@ -13,8 +17,12 @@ function displayOperation(numbers, operator, symbol, resultOfOperation) {
                 displayText.innerText = resultOfOperation;
             } else if(symbol === 'C') {
                 displayText.innerText = '0';
-            } else {
+            }else if(numbers[0] != ''){
                 displayText.innerText = numbers[0];
+            } else if(operator == ''){
+                displayText.innerText = 0;
+            }else {
+                displayText.innerText = 0;
             }
             displayText.classList.remove('processing');
         }, 100)
@@ -28,9 +36,6 @@ function displayOperation(numbers, operator, symbol, resultOfOperation) {
 };
 
 function operationHandler() {
-    const numbers = ['', ''];
-    let operator = '';
-    let resultOfOperation = null;
     return (symbol) => {
         try {
             switch(symbol) {
