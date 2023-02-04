@@ -1,4 +1,5 @@
 import { operate } from './utilities.js';
+import { keyboardHandler  } from './keyboard-support.js';
 
 let numbers = [0, 0];
 let operator = '';
@@ -69,8 +70,6 @@ function numberOperation(operator, symbol, numbers, resultOfOperation) {
     }
 
     displayOperation(numbers, operator, symbol, resultOfOperation);
-
-    console.log(numbers);
 }
 
 function clearCalculator() {
@@ -86,14 +85,19 @@ function basicOperation(symbol, operatorName) {
         operationResult();
         operator = operatorName;
     } else {
+        if (numbers[0] == 0 && resultOfOperation !== 0) {
+            numbers[0] = resultOfOperation;
+        }
+
         operator = operatorName;
+        resultOfOperation = 0;
     }
 
     displayOperation(numbers, operator, symbol, resultOfOperation);
 
     if (symbol === '=') {
         numbers.splice(0, 2, 0, 0);
-        resultOfOperation = 0;
+        numbers[0] = 0;
     }
 }
 
@@ -145,3 +149,10 @@ buttons.forEach(btn => {
         operationHandler(e.target.innerText);
     });
 });
+
+window.onload = function() {
+
+    document.onkeyup = keyboardHandler;
+}
+
+export { operationHandler };
