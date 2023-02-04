@@ -27,26 +27,22 @@ function displayOperation(numbers, operator, symbol, resultOfOperation) {
     }
 };
 
-function numberOperation(operator, symbol, numbersArr, resultOfOperation) {
+function numberOperation(operator, symbol, numbers, resultOfOperation) {
     if(operator !== '') {
-        numbersArr[1] = numbersArr[1] === 0 ? symbol : numbersArr[1] + symbol;
+        numbers[1] = numbers[1] === 0 ? symbol : numbers[1] + symbol;
     } else {
-        numbersArr[0] = numbersArr[0] === 0 ? symbol : numbersArr[0] + symbol;
+        numbers[0] = numbers[0] === 0 ? symbol : numbers[0] + symbol;
     }
 
-    displayOperation(numbersArr, operator, symbol, resultOfOperation);
-
-    console.log(numbersArr);
+    displayOperation(numbers, operator, symbol, resultOfOperation);
 }
 
-function clearOperation() {
-    const numbersArr = [0, 0];
-    const emptyOperator = '';
-    const emptyOperationResult=  0;
+function clearOperation(numbers, operator, resultOfOperation) {
+    numbers.splice(0, 2, 0, 0);
+    operator = '';
+    resultOfOperation = 0;
 
-    displayOperation(numbersArr, emptyOperator, 'C', emptyOperationResult);
-
-    return { numbersArr, emptyOperator, emptyOperationResult };
+    displayOperation(numbers, operator, 'C', resultOfOperation);
 }
 
 function operationHandler() {
@@ -118,16 +114,11 @@ function operationHandler() {
                     displayOperation(numbers, operator, symbol, resultOfOperation);
                     break;
                 case 'C':
-                    const clearOperationResult = clearOperation();
-                    // numbers.splice(0, 2, ...clearOperationResult.numbersArr);
-                    // operator = clearOperationResult.emptyOperator;
-                    // resultOfOperation = clearOperationResult.emptyOperationResult;
+                    clearOperation(numbers, operator, resultOfOperation);
                     break;
                 default:
                     numberOperation(operator, symbol, numbers, resultOfOperation)
                     break;
-                    // const numberOperationResult = numberOperation(operator, symbol, numbers, resultOfOperation)
-                    // numbers.splice(0, 2, ...numberOperationResult.numbersArr)
             }
         } catch(error) {
             alert(`
