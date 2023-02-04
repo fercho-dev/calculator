@@ -1,7 +1,7 @@
 function add(a,b) {
     return a + b;
 };
-function substract(a,b) {
+function subtract(a,b) {
     return a - b;
 };
 function multiply(a,b) {
@@ -18,8 +18,8 @@ function operate(a,b,operator) {
         switch(operator) {
             case 'add':
                 return add(a,b);
-            case 'substract':
-                return substract(a,b);
+            case 'subtract':
+                return subtract(a,b);
             case 'multiply':
                 return multiply(a,b);
             case 'divide':

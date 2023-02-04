@@ -52,12 +52,12 @@ function operationHandler() {
                         resultOfOperation =+ operate(numbers[0] === '' ? resultOfOperation : Number(numbers[0]), Number(numbers[1]), operator);
                         numbers[0] = resultOfOperation;
                         numbers[1] = '';
-                        operator = 'substract';
+                        operator = 'subtract';
                         console.log(resultOfOperation);
                         displayOperation(numbers, operator, symbol, resultOfOperation);
                         break;
                     }
-                    operator = 'substract';
+                    operator = 'subtract';
                     displayOperation(numbers, operator, symbol, resultOfOperation);
                     break;
                 case 'x':
