@@ -27,25 +27,25 @@ function displayOperation(numbers, operator, symbol, resultOfOperation) {
     }
 };
 
-function numberOperation(operator, symbol, numbers, resultOfOperation) {
+function numberOperation(operator, symbol, numbersArr, resultOfOperation) {
     if(operator !== '') {
-        numbers[1] = numbers[1] === 0 ? symbol : numbers[1] + symbol;
+        numbersArr[1] = numbersArr[1] === 0 ? symbol : numbersArr[1] + symbol;
     } else {
-        numbers[0] = numbers[0] === 0 ? symbol : numbers[0] + symbol;
+        numbersArr[0] = numbersArr[0] === 0 ? symbol : numbersArr[0] + symbol;
     }
 
-    displayOperation(numbers, operator, symbol, resultOfOperation);
+    displayOperation(numbersArr, operator, symbol, resultOfOperation);
 
-    console.log(numbers);
+    console.log(numbersArr);
 
-    return { numbers }
+    return { numbersArr }
 }
 
 function operationHandler() {
-    //changed const to let to test
-    let numbers = [0, 0];
+    const numbers = [0, 0];
     let operator = '';
     let resultOfOperation = 0;
+
     return (symbol) => {
         try {
             switch(symbol) {
@@ -117,8 +117,8 @@ function operationHandler() {
                     displayOperation(numbers, operator, symbol, resultOfOperation);
                     break;
                 default:
-                    const numberOperationResult = numberOperation(operator, symbol, numbers, resultOfOperation)
-                    numbers = numberOperationResult.numbers;
+                    const { numbersArr } = numberOperation(operator, symbol, numbers, resultOfOperation)
+                    numbers.splice(0, 2, ...numbersArr)
                     break;
             }
         } catch(error) {
