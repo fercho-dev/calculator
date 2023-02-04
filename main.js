@@ -1,10 +1,10 @@
 import { operate } from './utilities.js';
 
-// let numbers = ['', ''];
-// let operator = '';
-// let resultOfOperation = null;
-// let firstInputValue = [];
-// let secondInputValue = [];
+let numbers = [0, 0];
+let operator = '';
+let resultOfOperation = 0;
+let firstInputValue = [];
+let secondInputValue = [];
 
 function displayOperation(numbers, operator, symbol, resultOfOperation) {
     const displayText = document.getElementById('text-display');
@@ -33,14 +33,34 @@ function displayOperation(numbers, operator, symbol, resultOfOperation) {
         }, 100)
     } else if(!operator) {
         displayText.innerText = numbers[0];
-        // getInputValue()
+        getInputValue()
     } else if(operator) {
         displayText.innerText = numbers[1];
-        // getInputValue()
+        getInputValue()
     } else if(resultOfOperation) {
         displayText.innerText = resultOfOperation;
     }
 };
+
+
+function backSpaceClear() {
+        console.log(firstInputValue)
+        let inputLength = firstInputValue.length;
+        let lastInput = firstInputValue[inputLength - 1]
+        console.log(`the last input is: ${lastInput} and the index is ${lastInput.indexOf(lastInput)}`)
+        console.log(firstInputValue)
+    }
+
+function getInputValue() {
+    (numbers[0] != '') ? firstInputValue = numbers[0].split('') : firstInputValue == 0;
+    (numbers[1] != '') ? secondInputValue = numbers[1].split('') : secondInputValue == 0;
+}
+
+function operationResult() {
+    resultOfOperation =+ operate(numbers[0] === '' ? resultOfOperation : Number(numbers[0]), Number(numbers[1]), operator);
+    numbers[0] = resultOfOperation;
+    numbers[1] = '';
+}
 
 function numberOperation(operator, symbol, numbers, resultOfOperation) {
     if(operator !== '') {
@@ -54,123 +74,71 @@ function numberOperation(operator, symbol, numbers, resultOfOperation) {
     console.log(numbers);
 }
 
-function clearOperation(numbers, operator, resultOfOperation) {
+function clearCalculator() {
     numbers.splice(0, 2, 0, 0);
     operator = '';
     resultOfOperation = 0;
 
     displayOperation(numbers, operator, 'C', resultOfOperation);
-    console.log(numbers);
 }
 
-// const backSpaceClear = () =>{
-//     console.log(firstInputValue)
-//     let inputLength = firstInputValue.length;
-//     let lastInput = firstInputValue[inputLength - 1]
-//     console.log(`the last input is: ${lastInput} and the index is ${lastInput.indexOf(lastInput)}`)
-//     console.log(firstInputValue)
-// }
+function basicOperation(symbol, operatorName) {
+    if (operator) {
+        operationResult();
+        operator = operatorName;
+    } else {
+        operator = operatorName;
+    }
 
-// const getInputValue = () =>{
-    
-//     (numbers[0] != '') ? firstInputValue = numbers[0].split('') : firstInputValue == 0;
-//     (numbers[1] != '') ? secondInputValue = numbers[1].split('') : secondInputValue == 0;
-// }
-// const operationResult = () =>{
-//     resultOfOperation =+ operate(numbers[0] === '' ? resultOfOperation : Number(numbers[0]), Number(numbers[1]), operator);
-//     numbers[0] = resultOfOperation;
-//     numbers[1] = '';
-// }
+    displayOperation(numbers, operator, symbol, resultOfOperation);
 
-// const clearCalculator = () =>{
-//     numbers[0] = '';
-//     numbers[1] = '';
-//     operator = '';
-//     resultOfOperation = null;
-// }
+    if (symbol === '=') {
+        numbers.splice(0, 2, 0, 0);
+        resultOfOperation = 0;
+    }
+}
 
-function operationHandler() {
-    const numbers = [0, 0];
-    let operator = '';
-    let resultOfOperation = 0;
-    
-    return (symbol) => {
-        try {
-            switch(symbol) {
-                case '+':
-                    if(operator) {
-                        operationResult()
-                        console.log(resultOfOperation);
-                        displayOperation(numbers, operator, symbol, resultOfOperation);
-                        break;
-                    }
-                    operator = 'add';
-                    displayOperation(numbers, operator, symbol, resultOfOperation);
-                    break;
-                case '-':
-                    if(operator) {
-                        operationResult()
-                        console.log(resultOfOperation);
-                        displayOperation(numbers, operator, symbol, resultOfOperation);
-                        break;
-                    }
-                    operator = 'subtract';
-                    displayOperation(numbers, operator, symbol, resultOfOperation);
-                    break;
-                case 'x':
-                    if(operator) {
-                        operationResult()
-                        console.log(resultOfOperation);
-                        displayOperation(numbers, operator, symbol, resultOfOperation);
-                        break;
-                    }
-                    operator = 'multiply';
-                    displayOperation(numbers, operator, symbol, resultOfOperation);
-                    break;
-                case '/':
-                    if(operator) {
-                        operationResult()
-                        console.log(resultOfOperation);
-                        displayOperation(numbers, operator, symbol, resultOfOperation);
-                        break;
-                    }
-                    operator = 'divide';
-                    displayOperation(numbers, operator, symbol, resultOfOperation);
-                    break;
-                case '=':
-                    resultOfOperation =+ operate(numbers[0] === '' ? resultOfOperation : Number(numbers[0]), Number(numbers[1]), operator);
-                    numbers[0] = '';
-                    numbers[1] = '';
-                    operator = '';
-                    console.log(resultOfOperation);
-                    displayOperation(numbers, operator, symbol, resultOfOperation);
-                    break;
-                case 'C':
-                    clearOperation(numbers, operator, resultOfOperation);
-                    break;
-                case 'Delete':
-                    displayOperation(numbers, operator, symbol, resultOfOperation);
-                    break;
-                default:
-                    numberOperation(operator, symbol, numbers, resultOfOperation)
-                    break;
-            }
-        } catch(error) {
-            alert(`
-                Oops, something went wrong.
-                ${error}
-            `);
-            // clearCalculator()
-            displayOperation(numbers, operator, 'C', resultOfOperation);
+function operationHandler(symbol) {    
+    try {
+        switch(symbol) {
+            case '+':
+                basicOperation('+', 'add');
+                break;
+            case '-':
+                basicOperation('-', 'subtract');
+                break;
+            case 'x':
+                basicOperation('x', 'multiply');
+                break;
+            case '/':
+                basicOperation('/', 'divide');
+                break;
+            case '=':
+                basicOperation('=', '');
+                break;
+            case 'C':
+                clearCalculator();
+                break;
+            case 'Delete':
+                displayOperation(numbers, operator, symbol, resultOfOperation);
+                break;
+            default:
+                numberOperation(operator, symbol, numbers, resultOfOperation)
+                break;
         }
+    } catch(error) {
+        alert(`
+            Oops, something went wrong.
+            ${error}
+        `);
+        clearCalculator();
+        displayOperation(numbers, operator, 'C', resultOfOperation);
     }
 };
-
-const operation = operationHandler();
 
 const buttons = document.querySelectorAll('.calc-button');
 buttons.forEach(btn => {
     btn.addEventListener('click', (e) => {
-        operation(e.target.innerText);
+        operationHandler(e.target.innerText);
     });
 });
