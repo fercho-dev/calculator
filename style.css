@@ -28,6 +28,7 @@ main > div {
 .display > p {
     padding: 8px 8px 4px 0;
     border-radius: 12px 12px 4px 4px;
+    overflow-x: hidden;
 }
 .digits-and-operators {
     display: grid;
@@ -36,7 +37,9 @@ main > div {
     gap: 4px;
     padding: 0 8px 8px 8px;
 }
-.digits-and-operators > button {
+.digits-and-operators > button,
+div >  div > button.equals
+ {
     display: inline-block;
     width: auto;
     height: 40px;
@@ -47,6 +50,13 @@ main > div {
 }
 .digits-and-operators > button:active {
     background-color: peachpuff;
+}
+div.equalsBtn{
+    width: 100%;
+    padding: 4px 8px 8px 8px;
+}
+div >  div > button.equals {
+    width: 100%;
 }
 .processing {
     opacity: 5%;
