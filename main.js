@@ -42,7 +42,6 @@ function displayOperation(numbers, operator, symbol, resultOfOperation) {
     }
 };
 
-
 function backSpaceClear() {
         console.log(firstInputValue)
         let inputLength = firstInputValue.length;
@@ -98,6 +97,15 @@ function basicOperation(symbol, operatorName) {
     }
 }
 
+function errorHandler(error) {
+    alert(`
+            Oops, something went wrong.
+            ${error}
+        `);
+        clearCalculator();
+        displayOperation(numbers, operator, 'C', resultOfOperation);
+}
+
 function operationHandler(symbol) {    
     try {
         switch(symbol) {
@@ -127,12 +135,7 @@ function operationHandler(symbol) {
                 break;
         }
     } catch(error) {
-        alert(`
-            Oops, something went wrong.
-            ${error}
-        `);
-        clearCalculator();
-        displayOperation(numbers, operator, 'C', resultOfOperation);
+        errorHandler(error);
     }
 };
 
