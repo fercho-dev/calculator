@@ -28,9 +28,9 @@ function displayOperation(numbers, operator, symbol, resultOfOperation) {
 };
 
 function operationHandler() {
-    const numbers = ['', ''];
+    const numbers = [0, 0];
     let operator = '';
-    let resultOfOperation = null;
+    let resultOfOperation = 0;
     return (symbol) => {
         try {
             switch(symbol) {
