@@ -1,10 +1,10 @@
 import { operate } from './utilities.js';
 
-let numbers = ['', ''];
-let operator = '';
-let resultOfOperation = null;
-let firstInputValue = [];
-let secondInputValue = [];
+// let numbers = ['', ''];
+// let operator = '';
+// let resultOfOperation = null;
+// let firstInputValue = [];
+// let secondInputValue = [];
 
 function displayOperation(numbers, operator, symbol, resultOfOperation) {
     const displayText = document.getElementById('text-display');
@@ -33,10 +33,10 @@ function displayOperation(numbers, operator, symbol, resultOfOperation) {
         }, 100)
     } else if(!operator) {
         displayText.innerText = numbers[0];
-        getInputValue()
+        // getInputValue()
     } else if(operator) {
         displayText.innerText = numbers[1];
-        getInputValue()
+        // getInputValue()
     } else if(resultOfOperation) {
         displayText.innerText = resultOfOperation;
     }
@@ -50,6 +50,8 @@ function numberOperation(operator, symbol, numbers, resultOfOperation) {
     }
 
     displayOperation(numbers, operator, symbol, resultOfOperation);
+
+    console.log(numbers);
 }
 
 function clearOperation(numbers, operator, resultOfOperation) {
@@ -58,33 +60,34 @@ function clearOperation(numbers, operator, resultOfOperation) {
     resultOfOperation = 0;
 
     displayOperation(numbers, operator, 'C', resultOfOperation);
+    console.log(numbers);
 }
 
-const backSpaceClear = () =>{
-    console.log(firstInputValue)
-    let inputLength = firstInputValue.length;
-    let lastInput = firstInputValue[inputLength - 1]
-    console.log(`the last input is: ${lastInput} and the index is ${lastInput.indexOf(lastInput)}`)
-    console.log(firstInputValue)
-}
+// const backSpaceClear = () =>{
+//     console.log(firstInputValue)
+//     let inputLength = firstInputValue.length;
+//     let lastInput = firstInputValue[inputLength - 1]
+//     console.log(`the last input is: ${lastInput} and the index is ${lastInput.indexOf(lastInput)}`)
+//     console.log(firstInputValue)
+// }
 
-const getInputValue = () =>{
+// const getInputValue = () =>{
     
-    (numbers[0] != '') ? firstInputValue = numbers[0].split('') : firstInputValue == 0;
-    (numbers[1] != '') ? secondInputValue = numbers[1].split('') : secondInputValue == 0;
-}
-const operationResult = () =>{
-    resultOfOperation =+ operate(numbers[0] === '' ? resultOfOperation : Number(numbers[0]), Number(numbers[1]), operator);
-    numbers[0] = resultOfOperation;
-    numbers[1] = '';
-}
+//     (numbers[0] != '') ? firstInputValue = numbers[0].split('') : firstInputValue == 0;
+//     (numbers[1] != '') ? secondInputValue = numbers[1].split('') : secondInputValue == 0;
+// }
+// const operationResult = () =>{
+//     resultOfOperation =+ operate(numbers[0] === '' ? resultOfOperation : Number(numbers[0]), Number(numbers[1]), operator);
+//     numbers[0] = resultOfOperation;
+//     numbers[1] = '';
+// }
 
-const clearCalculator = () =>{
-    numbers[0] = '';
-    numbers[1] = '';
-    operator = '';
-    resultOfOperation = null;
-}
+// const clearCalculator = () =>{
+//     numbers[0] = '';
+//     numbers[1] = '';
+//     operator = '';
+//     resultOfOperation = null;
+// }
 
 function operationHandler() {
     const numbers = [0, 0];
@@ -157,7 +160,7 @@ function operationHandler() {
                 Oops, something went wrong.
                 ${error}
             `);
-            clearCalculator()
+            // clearCalculator()
             displayOperation(numbers, operator, 'C', resultOfOperation);
         }
     }
