@@ -27,8 +27,23 @@ function displayOperation(numbers, operator, symbol, resultOfOperation) {
     }
 };
 
+function numberOperation(operator, symbol, numbers, resultOfOperation) {
+    if(operator !== '') {
+        numbers[1] = numbers[1] === 0 ? symbol : numbers[1] + symbol;
+    } else {
+        numbers[0] = numbers[0] === 0 ? symbol : numbers[0] + symbol;
+    }
+
+    displayOperation(numbers, operator, symbol, resultOfOperation);
+
+    console.log(numbers);
+
+    return { numbers }
+}
+
 function operationHandler() {
-    const numbers = [0, 0];
+    //changed const to let to test
+    let numbers = [0, 0];
     let operator = '';
     let resultOfOperation = 0;
     return (symbol) => {
@@ -102,12 +117,8 @@ function operationHandler() {
                     displayOperation(numbers, operator, symbol, resultOfOperation);
                     break;
                 default:
-                    if(operator !== '') {
-                        numbers[1] += symbol;
-                    } else {
-                        numbers[0] += symbol;
-                    }
-                    displayOperation(numbers, operator, symbol, resultOfOperation);
+                    const numberOperationResult = numberOperation(operator, symbol, numbers, resultOfOperation)
+                    numbers = numberOperationResult.numbers;
                     break;
             }
         } catch(error) {
