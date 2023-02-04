@@ -37,8 +37,6 @@ function numberOperation(operator, symbol, numbersArr, resultOfOperation) {
     displayOperation(numbersArr, operator, symbol, resultOfOperation);
 
     console.log(numbersArr);
-
-    return { numbersArr }
 }
 
 function clearOperation() {
@@ -121,14 +119,15 @@ function operationHandler() {
                     break;
                 case 'C':
                     const clearOperationResult = clearOperation();
-                    numbers.splice(0, 2, ...clearOperationResult.numbersArr);
-                    operator = clearOperationResult.emptyOperator;
-                    resultOfOperation = clearOperationResult.emptyOperationResult;
+                    // numbers.splice(0, 2, ...clearOperationResult.numbersArr);
+                    // operator = clearOperationResult.emptyOperator;
+                    // resultOfOperation = clearOperationResult.emptyOperationResult;
                     break;
                 default:
-                    const numberOperationResult = numberOperation(operator, symbol, numbers, resultOfOperation)
-                    numbers.splice(0, 2, ...numberOperationResult.numbersArr)
+                    numberOperation(operator, symbol, numbers, resultOfOperation)
                     break;
+                    // const numberOperationResult = numberOperation(operator, symbol, numbers, resultOfOperation)
+                    // numbers.splice(0, 2, ...numberOperationResult.numbersArr)
             }
         } catch(error) {
             alert(`
