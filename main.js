@@ -74,7 +74,7 @@ const backSpaceClear = () =>{
 const getInputValue = () =>{
     (numbers[0] != '' && operator == "") ? firstInputValue = numbers[0].split('') : firstInputValue;
     (numbers[1] != '' && operator != "") ? secondInputValue = numbers[1].split('') : secondInputValue;
-
+}
 function backSpaceClear() {
         console.log(firstInputValue)
         let inputLength = firstInputValue.length;
