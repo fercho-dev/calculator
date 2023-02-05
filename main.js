@@ -5,9 +5,11 @@ let operator = '';
 let resultOfOperation = null;
 let firstInputValue = [];
 let secondInputValue = [];
+let symbol;
+let displayText;
 
 function displayOperation(numbers, operator, symbol, resultOfOperation) {
-    const displayText = document.getElementById('text-display');
+    displayText = document.getElementById('text-display');
     if(
         symbol === '+' || symbol === '-' ||
         symbol === 'x' || symbol === '/' ||
@@ -21,7 +23,7 @@ function displayOperation(numbers, operator, symbol, resultOfOperation) {
             }else if(symbol === 'C') {
                 displayText.innerText = '0';
             }else if(symbol === 'Delete') {
-               backSpaceClear()
+                backSpaceClear()
             }else if(numbers[0] != ''){
                 displayText.innerText = numbers[0];
             } else if(operator == ''){
@@ -33,26 +35,44 @@ function displayOperation(numbers, operator, symbol, resultOfOperation) {
         }, 100)
     } else if(!operator) {
         displayText.innerText = numbers[0];
-        getInputValue()
     } else if(operator) {
         displayText.innerText = numbers[1];
-        getInputValue()
     } else if(resultOfOperation) {
         displayText.innerText = resultOfOperation;
+    }else{
+        displayText.innerText = 0;
     }
 };
-
+const closeUp = () =>{
+    if(numbers[0] != '' && operator == ""){
+        (firstInputValue != "") ? firstInputValue = firstInputValue.join('') :  firstInputValue = 0;
+        numbers[0] = firstInputValue;
+        displayOperation(numbers, operator,symbol, resultOfOperation);
+    }
+    if(numbers[1] != '' && operator != ""){
+        (secondInputValue != "") ? secondInputValue = secondInputValue.join('') : secondInputValue = 0;
+        numbers[1] = secondInputValue;
+        (symbol == '') ? displayOperation(numbers, operator, symbol, resultOfOperation) : displayText.innerText = numbers[1];
+    }
+}
 const backSpaceClear = () =>{
-    console.log(firstInputValue)
-    let inputLength = firstInputValue.length;
-    let lastInput = firstInputValue[inputLength - 1]
-    console.log(`the last input is: ${lastInput} and the index is ${lastInput.indexOf(lastInput)}`)
-    console.log(firstInputValue)
+    getInputValue()
+    let inputLength; 
+    if(numbers[0] != '' && operator == ""){
+        inputLength = firstInputValue.length;
+        firstInputValue = firstInputValue.splice(0, (inputLength - 1))
+    }
+    else if(numbers[1] != '' && operator != ""){
+        inputLength = secondInputValue.length;
+        secondInputValue = secondInputValue.splice(0, (inputLength - 1))
+    }else{
+        return false
+    }
+    closeUp()
 }
 const getInputValue = () =>{
-
-    (numbers[0] != '') ? firstInputValue = numbers[0].split('') : firstInputValue == 0;
-    (numbers[1] != '') ? secondInputValue = numbers[1].split('') : secondInputValue == 0;
+    (numbers[0] != '' && operator == "") ? firstInputValue = numbers[0].split('') : firstInputValue;
+    (numbers[1] != '' && operator != "") ? secondInputValue = numbers[1].split('') : secondInputValue;
 }
 const operationResult = () =>{
     resultOfOperation =+ operate(numbers[0] === '' ? resultOfOperation : Number(numbers[0]), Number(numbers[1]), operator);
@@ -72,7 +92,6 @@ function operationHandler() {
                 case '+':
                     if(operator) {
                         operationResult()
-                        console.log(resultOfOperation);
                         displayOperation(numbers, operator, symbol, resultOfOperation);
                         break;
                     }
@@ -82,7 +101,6 @@ function operationHandler() {
                 case '-':
                     if(operator) {
                         operationResult()
-                        console.log(resultOfOperation);
                         displayOperation(numbers, operator, symbol, resultOfOperation);
                         break;
                     }
@@ -92,7 +110,6 @@ function operationHandler() {
                 case 'x':
                     if(operator) {
                         operationResult()
-                        console.log(resultOfOperation);
                         displayOperation(numbers, operator, symbol, resultOfOperation);
                         break;
                     }
@@ -102,7 +119,6 @@ function operationHandler() {
                 case '/':
                     if(operator) {
                         operationResult()
-                        console.log(resultOfOperation);
                         displayOperation(numbers, operator, symbol, resultOfOperation);
                         break;
                     }
@@ -114,7 +130,6 @@ function operationHandler() {
                     numbers[0] = '';
                     numbers[1] = '';
                     operator = '';
-                    console.log(resultOfOperation);
                     displayOperation(numbers, operator, symbol, resultOfOperation);
                     break;
                 case 'C':
