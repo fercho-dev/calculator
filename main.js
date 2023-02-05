@@ -75,19 +75,6 @@ const getInputValue = () =>{
     (numbers[0] != '' && operator == "") ? firstInputValue = numbers[0].split('') : firstInputValue;
     (numbers[1] != '' && operator != "") ? secondInputValue = numbers[1].split('') : secondInputValue;
 }
-function backSpaceClear() {
-        console.log(firstInputValue)
-        let inputLength = firstInputValue.length;
-        let lastInput = firstInputValue[inputLength - 1]
-        console.log(`the last input is: ${lastInput} and the index is ${lastInput.indexOf(lastInput)}`)
-        console.log(firstInputValue)
-    }
-
-function getInputValue() {
-    (numbers[0] != '') ? firstInputValue = numbers[0].split('') : firstInputValue == 0;
-    (numbers[1] != '') ? secondInputValue = numbers[1].split('') : secondInputValue == 0;
-}
-
 function operationResult() {
     resultOfOperation =+ operate(numbers[0] === '' ? resultOfOperation : Number(numbers[0]), Number(numbers[1]), operator);
     numbers[0] = resultOfOperation;
