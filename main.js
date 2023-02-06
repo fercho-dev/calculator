@@ -83,8 +83,20 @@ function operationResult() {
 
 function numberOperation(operator, symbol, numbers, resultOfOperation) {
     if(operator !== '') {
+        if(symbol === '0' && numbers[1][0] === '0') {
+            return;
+        }
+        if(symbol === '.' && numbers[1].includes('.')) {
+            return;
+        }
         numbers[1] = numbers[1] === 0 ? symbol : numbers[1] + symbol;
     } else {
+        if(symbol === '0' && numbers[0][0] === '0') {
+            return;
+        }
+        if(symbol === '.' && numbers[0].includes('.')) {
+            return;
+        }
         numbers[0] = numbers[0] === 0 ? symbol : numbers[0] + symbol;
     }
 

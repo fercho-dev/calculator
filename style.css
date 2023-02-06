@@ -54,9 +54,26 @@ div >  div > button.equals
 div.equalsBtn{
     width: 100%;
     padding: 4px 8px 8px 8px;
+    display: flex;
+    justify-content: space-around;
 }
 div >  div > button.equals {
-    width: 100%;
+    display: inline-block;
+    width: 80%;
+}
+div >  div > button.equals:active {
+    background-color: peachpuff;
+}
+.equalsBtn .dot {
+    display: inline-block;
+    width: 40px;
+    font-size: 20px;
+    border: none;
+    border-radius: 12px;
+    cursor: pointer;
+}
+.equalsBtn .dot:active {
+    background-color: peachpuff;
 }
 .processing {
     opacity: 5%;
